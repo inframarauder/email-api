@@ -23,12 +23,11 @@ app.get("/", (req, res) => res.sendStatus(200));
 
 app.post("/", upload.any(), (req, res) => {
   const { email, query } = req.body;
-  const attachments = [
-    {
-      filename: `${req.files[0].originalname}`,
-      content: fs.createReadStream(req.files[0].path),
-    },
-  ];
+  const { files } = req;
+  const attachments = files.map((file) => ({
+    filename: `${file.originalname}`,
+    content: fs.createReadStream(file.path),
+  }));
   sendEmail({ email, query, attachments });
   res.sendStatus(200);
 });

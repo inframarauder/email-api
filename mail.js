@@ -18,7 +18,7 @@ module.exports = async ({ email, query, attachments }) => {
   try {
     const mailOptions = {
       from: process.env.EMAIL,
-      to: "subhasisdas125@gmail.com",
+      to: process.env.TO_EMAIL,
       subject: "Unsplash query",
       html: `
       <strong>Query from ${email} </strong>
